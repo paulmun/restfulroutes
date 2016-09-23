@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Restful Routes</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<p>Name: </p>
+			</td>
+			<td>
+				<p>{{product.name}}</p>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>Description: </p>
+			</td>
+			<td>
+				<p>{{product.description}}</p>
+			</td>
+		</tr>	
+		<tr>
+			<td>
+				<p>Price: </p>
+			</td>
+			<td>
+				<p>${{product.price}}</p>
+			</td>
+		</tr>	
+	</table>
+	<p>
+		<a href="{% url 'products:edit' productID=product.id %}">Edit</a>
+		 | 
+		<a href="{% url 'products:index' %}">Back</a> 
+	</p>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Restful Routes</title>
+</head>
+<body>
+	{% for message in messages %}
+		<p>{{message}}</p>
+	{% endfor %}
+	<h2>
+		{% if submitType == 'Update' %}
+			Edit Product {{product.id}}
+		{% else %}
+			Add a new product!
+		{% endif %}
+	</h2>
+	<form action="
+		{% if submitType == 'Update' %}
+			{% url 'products:update' productID=product.id %}
+		{% else %}
+			{% url 'products:create' %}
+		{% endif %}
+		" method="post">
+		{% csrf_token %}
+		<input type="text" name="name" placeholder="Name" value="{{product.name}}">
+		<input type="text" name="description" placeholder="Description" value="{{product.description}}">
+		<input type="number" name="price" step=".01" placeholder="Price" value="{{product.price}}">
+		<input type="submit" value={{submitType}}>
+	</form>
+	{% if submitType == 'Update' %}
+		<p>
+			<a href="{% url 'products:show' productID=product.id %}">Show</a>
+			 | 
+			<a href="{% url 'products:index' %}">Back</a>
+		</p>
+	{% else %}
+		<a href="{% url 'products:index' %}">Back</a>
+	{% endif %}
+</body>
+</html>

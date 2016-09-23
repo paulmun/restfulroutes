@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Restful Routes</title>
+</head>
+<body>
+	<h2>Products</h2>
+	{% for message in messages %}
+		<p>{{message}}</p>
+	{% endfor %}
+	<table>
+		<thead>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Price</td>
+			<td colspan="3">Actions</td>
+		</thead>
+		<tbody>
+			{% for product in products %}
+				<tr>
+					<td>{{ product.name }}</td>
+					<td>{{ product.description }}</td>
+					<td>{{ product.price }}</td>
+					<td><a href="{% url 'products:show' productID=product.id %}">Show</a></td>
+					<td><a href="{% url 'products:edit' productID=product.id %}">Edit</a></td>
+					<td>
+						<form action="{% url 'products:remove' productID=product.id %}">
+						<input type="submit" value="Remove">
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{% url 'products:new' %}">Add a new product</a>
+</body>
+</html>
